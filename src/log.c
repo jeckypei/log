@@ -49,9 +49,15 @@ char * logLevel [] = {
 	(char *)NULL
 };
 extern int log_open();
-int log_init(int enable_console_output)
+int log_init(int enable_console_output, char *loglevel, char *logfile, unsigned logsize)
 {
 	int i;
+	if(logfile)
+		g_log_file_name = strdup(logfile);
+	if(logsize)
+		g_log_size_limit = logsize;
+	if(loglevel)
+		g_log_level_str = strdup(loglevel); 
 	if(g_log_level_str){
 		for (i = 0; logLevel[i] != NULL; i++) {
 			if( strcmp(g_log_level_str, logLevel[i]) == 0){
